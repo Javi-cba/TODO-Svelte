@@ -1,7 +1,6 @@
 <script lang="ts">
     import * as Form from "$lib/components/ui/form/index.js";
     import { Input } from "$lib/components/ui/input/index.js";
-
     import { formSchema, type FormSchema } from "./schema";
     import {
      type SuperValidated,
@@ -10,19 +9,32 @@
     } from "sveltekit-superforms";
     import { zodClient } from "sveltekit-superforms/adapters";
     
-    let { data }: { data: { form: SuperValidated<Infer<FormSchema>> } } = $props();
-    
+
+    let { data, id }: { data: { form: SuperValidated<Infer<FormSchema>> }, id: string } = $props();
+    console.log('idantes: ', id);
+      if (id) {
+  data.form.data = {
+    ...data.form.data,
+    id,
+  }
+  ;
+}     
+
     const form = superForm(data.form, {
      validators: zodClient(formSchema),
     });
     
     
     const { form: formData, enhance } = form;
+
+
    </script>
     
  <!-- Formulario HTML -->
  <form method="POST" use:enhance>
    <Form.Field {form} name="title">
+    <input type="hidden" name="id" value={$formData.id || ''} />
+
      <Form.Control>
        {#snippet children({ props })} 
          <Form.Label>Título</Form.Label>

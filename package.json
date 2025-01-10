@@ -21,7 +21,6 @@
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^4.0.0",
 		"autoprefixer": "^10.4.20",
-		"bits-ui": "1.0.0-next.77",
 		"clsx": "^2.1.1",
 		"drizzle-kit": "^0.22.0",
 		"eslint": "^9.7.0",
@@ -49,6 +48,9 @@
 		"@node-rs/argon2": "^1.1.0",
 		"@oslojs/crypto": "^1.0.1",
 		"@oslojs/encoding": "^1.1.0",
-		"drizzle-orm": "^0.33.0"
+		"bits-ui": "^0.22.0",
+		"drizzle-orm": "^0.33.0",
+		"svelte-toast": "^1.0.0",
+		"svelte-toastify": "^0.0.27"
 	}
 }

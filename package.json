@@ -50,6 +50,8 @@
 		"@oslojs/encoding": "^1.1.0",
 		"bits-ui": "^0.22.0",
 		"drizzle-orm": "^0.33.0",
+		"svelte-headless-table": "^0.18.3",
+		"svelte-routing": "^2.13.0",
 		"svelte-toast": "^1.0.0",
 		"svelte-toastify": "^0.0.27"
 	}

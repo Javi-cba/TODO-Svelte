@@ -26,6 +26,15 @@ importers:
       drizzle-orm:
         specifier: ^0.33.0
         version: 0.33.0(@neondatabase/serverless@0.9.5)(@types/pg@8.11.6)
+      svelte-headless-table:
+        specifier: ^0.18.3
+        version: 0.18.3(svelte@5.17.3)
+      svelte-navigator:
+        specifier: 2.0.0
+        version: 2.0.0(svelte@5.17.3)
+      svelte-routing:
+        specifier: ^2.13.0
+        version: 2.13.0
       svelte-toast:
         specifier: ^1.0.0
         version: 1.0.0
@@ -2392,6 +2401,34 @@ packages:
       svelte:
         optional: true
 
+  svelte-headless-table@0.18.3:
+    resolution: {integrity: sha512-1zVnqXW0dvn6ZceYa94k+ziK+w5Dj9nlWYTQGXBv2JhM0resj9w7CWpclZK1TJwAALfEeH4InPBPO87L5fr+nQ==}
+    peerDependencies:
+      svelte: ^4.0.0
+
+  svelte-keyed@2.0.0:
+    resolution: {integrity: sha512-7TeEn+QbJC2OJrHiuM0T8vMBkms3DNpTE+Ir+NtnVBnBMA78aL4f1ft9t0Hn/pBbD/TnIXi4YfjFRAgtN+DZ5g==}
+    peerDependencies:
+      svelte: ^4.0.0
+
+  svelte-navigator@2.0.0:
+    resolution: {integrity: sha512-jWVgZ4Xk5OSf7oJAsEF+okrpRE8yqEeww+zFxTrN8KzK5nzMuvR0uWaumIH7AddZOl+BcofaXuO2ECJdTtgxtg==}
+    peerDependencies:
+      svelte: 3.x
+
+  svelte-render@2.0.1:
+    resolution: {integrity: sha512-RpB0SurwXm4xhjvHHtjeqMmvd645FURb79GFOotScOSqnKK5vpqBgoBPGC0pp+E/eZgDSQ9rRAdn/+N4ys1mXQ==}
+    peerDependencies:
+      svelte: ^4.0.0
+
+  svelte-routing@2.13.0:
+    resolution: {integrity: sha512-/NTxqTwLc7Dq306hARJrH2HLXOBtKd7hu8nxgoFDlK0AC4SOKnzisiX/9m8Uksei1QAWtlAEdF91YphNM8iDMg==}
+
+  svelte-subscribe@2.0.1:
+    resolution: {integrity: sha512-eKXIjLxB4C7eQWPqKEdxcGfNXm2g/qJ67zmEZK/GigCZMfrTR3m7DPY93R6MX+5uoqM1FRYxl8LZ1oy4URWi2A==}
+    peerDependencies:
+      svelte: ^4.0.0
+
   svelte-toast@1.0.0:
     resolution: {integrity: sha512-i6XHJgCgyAYmobEXS78iei6cQBLYIDgk1rrj65wM0sIi4RzCl/9205sVruZT7zUf0N2xsLkeN2rFh9inlRJXEg==}
 
@@ -4564,6 +4601,32 @@ snapshots:
       postcss: 8.4.49
       postcss-scss: 4.0.9(postcss@8.4.49)
     optionalDependencies:
+      svelte: 5.17.3
+
+  svelte-headless-table@0.18.3(svelte@5.17.3):
+    dependencies:
+      svelte: 5.17.3
+      svelte-keyed: 2.0.0(svelte@5.17.3)
+      svelte-render: 2.0.1(svelte@5.17.3)
+      svelte-subscribe: 2.0.1(svelte@5.17.3)
+
+  svelte-keyed@2.0.0(svelte@5.17.3):
+    dependencies:
+      svelte: 5.17.3
+
+  svelte-navigator@2.0.0(svelte@5.17.3):
+    dependencies:
+      svelte: 5.17.3
+
+  svelte-render@2.0.1(svelte@5.17.3):
+    dependencies:
+      svelte: 5.17.3
+      svelte-subscribe: 2.0.1(svelte@5.17.3)
+
+  svelte-routing@2.13.0: {}
+
+  svelte-subscribe@2.0.1(svelte@5.17.3):
+    dependencies:
       svelte: 5.17.3
 
   svelte-toast@1.0.0: {}

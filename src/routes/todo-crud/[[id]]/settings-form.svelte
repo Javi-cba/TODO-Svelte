@@ -1,61 +1,73 @@
 <script lang="ts">
-    import * as Form from "$lib/components/ui/form/index.js";
-    import { Input } from "$lib/components/ui/input/index.js";
-    import { formSchema, type FormSchema } from "./schema";
-    import {
-     type SuperValidated,
-     type Infer,
-     superForm,
-    } from "sveltekit-superforms";
-    import { zodClient } from "sveltekit-superforms/adapters";
-    
+  import * as Form from "$lib/components/ui/form/index.js";
+  import { Input } from "$lib/components/ui/input/index.js";
+  import { formSchema, type FormSchema } from "./schema";
+  import {
+    type SuperValidated,
+    type Infer,
+    superForm,
+  } from "sveltekit-superforms";
+  import { zodClient } from "sveltekit-superforms/adapters";
+  import { getTodoById } from '../../../services/todo-crud';
+  import type { Todo } from '../../../types/todo';
+  import { onMount } from 'svelte';
 
-    let { data, id }: { data: { form: SuperValidated<Infer<FormSchema>> }, id: string } = $props();
-    console.log('idantes: ', id);
-      if (id) {
-  data.form.data = {
-    ...data.form.data,
-    id,
-  }
-  ;
-}     
+  let { data, id }: { data: { form: SuperValidated<Infer<FormSchema>> }, id: string } = $props();
 
-    const form = superForm(data.form, {
-     validators: zodClient(formSchema),
-    });
-    
-    
-    const { form: formData, enhance } = form;
+  onMount(async () => {
+    // si el id viene en la url, lo agregamos al formulario
+    if (id) {
+      const resp: Todo[] = await getTodoById(id);
 
+ // Esperamos 3 segundos (3000 milisegundos)
+      await new Promise(resolve => setTimeout(resolve, 3000));
 
-   </script>
-    
- <!-- Formulario HTML -->
- <form method="POST" use:enhance>
-   <Form.Field {form} name="title">
+      // Ahora seteamos los datos
+      if (resp.length > 0) { 
+        let { description, title } = resp[0];
+
+        data.form.data = {
+          id,
+          description,
+          title
+        };
+        console.log(data.form.data);
+      }
+    }
+  });
+
+  const form = superForm(data.form, {
+    validators: zodClient(formSchema),
+  });
+
+  const { form: formData, enhance } = form;
+</script>
+
+<!-- Formulario HTML -->
+<form method="POST" use:enhance>
+  <Form.Field {form} name="title">
     <input type="hidden" name="id" value={$formData.id || ''} />
 
-     <Form.Control>
-       {#snippet children({ props })} 
-         <Form.Label>Título</Form.Label>
-         <Input {...props} bind:value={$formData.title} />
-       {/snippet}
-     </Form.Control>
-     <Form.Description>Este es el encabezado del TO-DO.</Form.Description>
-     <Form.FieldErrors />
-   </Form.Field>
- 
-   <Form.Field {form} name="description">
-     <Form.Control>
-       {#snippet children({ props })}
-         <Form.Label>Descripción</Form.Label>
-         <Input {...props} bind:value={$formData.description} />
-       {/snippet}
-     </Form.Control>
-     <Form.Description>Esta es una descripción adicional.</Form.Description>
-     <Form.FieldErrors />
-   </Form.Field>
- 
-   <Form.Button>Submit</Form.Button>
- </form>
- 
+    <Form.Control>
+      {#snippet children({ props })} 
+        <Form.Label>Título</Form.Label>
+        <Input {...props} bind:value={$formData.title} />
+      {/snippet}
+    </Form.Control>
+    <Form.Description>Este es el encabezado del TO-DO.</Form.Description>
+    <Form.FieldErrors />
+  </Form.Field>
+
+  <Form.Field {form} name="description">
+    <Form.Control>
+      {#snippet children({ props })}
+        <Form.Label>Descripción</Form.Label>
+        <Input {...props} bind:value={$formData.description} />
+      {/snippet}
+    </Form.Control>
+    <Form.Description>Esta es una descripción adicional.</Form.Description>
+    <Form.FieldErrors />
+  </Form.Field>
+
+  <Form.Button>Submit</Form.Button>
+</form>

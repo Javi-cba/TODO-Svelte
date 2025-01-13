@@ -20,18 +20,12 @@ importers:
       '@oslojs/encoding':
         specifier: ^1.1.0
         version: 1.1.0
-      bits-ui:
-        specifier: ^0.22.0
-        version: 0.22.0(svelte@5.17.3)
       drizzle-orm:
         specifier: ^0.33.0
         version: 0.33.0(@neondatabase/serverless@0.9.5)(@types/pg@8.11.6)
       svelte-headless-table:
         specifier: ^0.18.3
         version: 0.18.3(svelte@5.17.3)
-      svelte-navigator:
-        specifier: 2.0.0
-        version: 2.0.0(svelte@5.17.3)
       svelte-routing:
         specifier: ^2.13.0
         version: 2.13.0
@@ -57,6 +51,9 @@ importers:
       autoprefixer:
         specifier: ^10.4.20
         version: 10.4.20(postcss@8.4.49)
+      bits-ui:
+        specifier: ^0.22.0
+        version: 0.22.0(svelte@5.17.3)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -2411,11 +2408,6 @@ packages:
     peerDependencies:
       svelte: ^4.0.0
 
-  svelte-navigator@2.0.0:
-    resolution: {integrity: sha512-jWVgZ4Xk5OSf7oJAsEF+okrpRE8yqEeww+zFxTrN8KzK5nzMuvR0uWaumIH7AddZOl+BcofaXuO2ECJdTtgxtg==}
-    peerDependencies:
-      svelte: 3.x
-
   svelte-render@2.0.1:
     resolution: {integrity: sha512-RpB0SurwXm4xhjvHHtjeqMmvd645FURb79GFOotScOSqnKK5vpqBgoBPGC0pp+E/eZgDSQ9rRAdn/+N4ys1mXQ==}
     peerDependencies:
@@ -4611,10 +4603,6 @@ snapshots:
       svelte-subscribe: 2.0.1(svelte@5.17.3)
 
   svelte-keyed@2.0.0(svelte@5.17.3):
-    dependencies:
-      svelte: 5.17.3
-
-  svelte-navigator@2.0.0(svelte@5.17.3):
     dependencies:
       svelte: 5.17.3
 

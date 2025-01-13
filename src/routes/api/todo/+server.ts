@@ -6,7 +6,10 @@ import { eq } from 'drizzle-orm';
 // GET: Obtener todas las tareas (todo)
 export const GET = async () => {
   try {
-    const todo = await db.select().from(table.todo);
+    const todo = await db
+      .select()
+      .from(table.todo)
+      .where(eq(table.todo.isCompleted, false));
     if (todo.length > 0) {
       return json(todo, { status: 200 });
     } else {

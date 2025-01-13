@@ -8,8 +8,11 @@
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
 
+  import { Input } from "$lib/components/ui/input";
 
-	let  todos = writable<Todo[]>([]);
+
+		let todos = writable<Todo[]>([]);
+			let filterText = writable('');
 
 onMount(async () => {
 	const fetchedData = await getData();
@@ -17,6 +20,7 @@ onMount(async () => {
 });
 
 	const table = createTable<Todo>(todos);
+	
 
 	// Configuramos las columnas de la tabla
 	const columns = table.createColumns([

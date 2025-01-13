@@ -1,6 +1,6 @@
 import type { Todo } from '../types/todo';
 
-const baseURL = 'http://localhost:5173';
+const baseURL = import.meta.env.VITE_BASE_URL || 'http://localhost:5173';
 
 const getData = async (): Promise<Todo[]> => {
   try {

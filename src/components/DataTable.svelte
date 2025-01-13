@@ -2,25 +2,21 @@
 	import { createTable, Render, Subscribe } from 'svelte-headless-table';
 	import * as Table from '$lib/components/ui/table';
 	import type { Todo } from '../types/todo';
-	import { getData,  putStatusById } from '../services/todo-crud';
-	import { Button } from '$lib/components/ui/button';
+	import { getData, putStatusById } from '../services/todo-crud';
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
+	import { Button } from '$lib/components/ui/button';
 
-  import { Input } from "$lib/components/ui/input";
+	let todos = writable<Todo[]>([]);
+	let filterText = writable('');
 
-
-		let todos = writable<Todo[]>([]);
-			let filterText = writable('');
-
-onMount(async () => {
-	const fetchedData = await getData();
-	todos.set(fetchedData); // Actualizamos la store con los datos obtenidos
-});
+	onMount(async () => {
+		const fetchedData = await getData();
+		todos.set(fetchedData); // Actualizamos la store con los datos obtenidos
+	});
 
 	const table = createTable<Todo>(todos);
-	
 
 	// Configuramos las columnas de la tabla
 	const columns = table.createColumns([
@@ -40,16 +36,13 @@ onMount(async () => {
 	async function handleDelete(id: string) {
 		await putStatusById(id);
 
-    	// Recuperar nuevamente los datos actualizados
-    	const fetchedData = await getData();
-    	todos.set(fetchedData); // Actualizamos la tienda con los datos actualizados
+		// Recuperar nuevamente los datos actualizados
+		const fetchedData = await getData();
+		todos.set(fetchedData); // Actualizamos la tienda con los datos actualizados
 	}
-
 </script>
 
 <div class="rounded-md border">
-	
-
 	<Table.Root {...$tableAttrs}>
 		<Table.Header>
 			{#each $headerRows as headerRow}
@@ -70,7 +63,7 @@ onMount(async () => {
 		<Table.Body {...$tableBodyAttrs}>
 			{#each $pageRows as row (row.id)}
 				<Subscribe rowAttrs={row.attrs()} let:rowAttrs>
-					<Table.Row {...rowAttrs} >
+					<Table.Row {...rowAttrs}>
 						{#each row.cells as cell (cell.id)}
 							<Subscribe attrs={cell.attrs()} let:attrs>
 								<Table.Cell {...attrs}>
@@ -81,7 +74,11 @@ onMount(async () => {
 						<!-- celda extra para acciones -->
 						<Table.Cell>
 							<Button on:click={() => goto(`/todo-crud/${row.original.id}`)}>Editar</Button>
-							<Button on:click={() => {handleDelete(row.original.id);}}>Eliminar</Button>
+							<Button
+								on:click={() => {
+									handleDelete(row.original.id);
+								}}>Eliminar</Button
+							>
 						</Table.Cell>
 					</Table.Row>
 				</Subscribe>

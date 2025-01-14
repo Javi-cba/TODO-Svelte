@@ -1,39 +1,45 @@
-# sv
+## Funcionalidades
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+La aplicación web ofrece las siguientes funcionalidades:
 
-## Creating a project
+- **Crear tarea**: Los usuarios pueden crear nuevas tareas, añadiendo un título, una descripción y una fecha límite.
 
-If you're seeing this, you've probably already done this step. Congrats!
+- **Editar tarea**: Los usuarios pueden editar cualquier tarea, cambiando el título, la descripción, la fecha límite o el estado de la tarea.
 
-```bash
-# create a new project in the current directory
-npx sv create
+- **Eliminar tarea**: Los usuarios pueden eliminar las tareas que ya no necesiten.
 
-# create a new project in my-app
-npx sv create my-app
-```
+- **Ver tareas**: Los usuarios pueden consultar todas las tareas y también filtrarlas por nombre y/o usuario.
 
-## Developing
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
-```bash
-npm run dev
+## Instalación
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+Sigue estos pasos para ejecutar el proyecto en tu máquina local:
 
-## Building
+1. **Clonar el repositorio**:
+   ```bash
+   git clone https://github.com/Javi-cba/TODO-Svelte.git
+   ```
+   
+2. Navega al directorio:
+   ```bash
+   cd TODO-Svelte
+   ```
+   
+3. Configura las variables de entorno:
+   ```bash
+   DATABASE_URL=postgres://user:password@host:port/db-name
+   VITE_BASE_URL=http://localhost:5173
+   ```
+   
+4. Instala las dependencias:
+   ```bash
+   pnpm install
+      ```
 
-To create a production version of your app:
+6. Ejecuta el proyecto:
+   ```bash
+   pnpm run dev
+   ```
+![image](https://github.com/user-attachments/assets/d077c4ee-3699-4ac0-9467-78513eea0845)
 
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
-https://github.com/user-attachments/assets/d077c4ee-3699-4ac0-9467-78513eea0845

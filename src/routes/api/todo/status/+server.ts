@@ -1,3 +1,4 @@
+// Para actualizar el estado de una tarea (para dar de baja o de alta)
 import { json, type RequestEvent } from '@sveltejs/kit';
 import { db } from '$lib/server/db';
 import * as table from '$lib/server/db/schema';
@@ -28,7 +29,7 @@ export const PUT = async ({ request }: RequestEvent) => {
 		const currntIsCompleted = currntTodo[0].isCompleted;
 		const newIsCompleted = !currntIsCompleted;
 
-		// update isCompleted
+		// Update isCompleted
 		const updatedTodo = await db
 			.update(table.todo)
 			.set({ isCompleted: newIsCompleted })

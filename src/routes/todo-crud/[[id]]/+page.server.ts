@@ -1,3 +1,4 @@
+// MIS SERVER ACTIONS DEL FORMULARIO
 import type { PageServerLoad, Actions } from './$types';
 import { fail } from '@sveltejs/kit';
 import { superValidate } from 'sveltekit-superforms';
@@ -24,10 +25,7 @@ export const actions: Actions = {
 		}
 
 		const { id, title, description } = form.data;
-		console.log('id: ', id);
 		if (id === undefined) {
-			console.log('nohayid');
-
 			try {
 				await db
 					.insert(table.todo)
@@ -49,8 +47,6 @@ export const actions: Actions = {
 				});
 			}
 		} else {
-			console.log('hayid');
-
 			try {
 				const idAsNumber = parseInt(id, 10);
 

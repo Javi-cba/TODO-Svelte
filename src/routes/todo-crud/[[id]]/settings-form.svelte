@@ -1,5 +1,6 @@
 <script lang="ts">
-  import * as Form from "$lib/components/ui/form/index.js";
+  import {goto} from '$app/navigation';
+  import * as Form from "$lib/components/ui/form/index.js"; 
   import { Input } from "$lib/components/ui/input/index.js";
   import { formSchema, type FormSchema } from "./schema";
   import {
@@ -15,23 +16,17 @@
   let { data, id }: { data: { form: SuperValidated<Infer<FormSchema>> }, id: string } = $props();
 
   onMount(async () => {
-    // si el id viene en la url, lo agregamos al formulario
     if (id) {
       const resp: Todo[] = await getTodoById(id);
-
- // Esperamos 3 segundos (3000 milisegundos)
-      await new Promise(resolve => setTimeout(resolve, 3000));
-
-      // Ahora seteamos los datos
-      if (resp.length > 0) { 
+      if (resp.length > 0) {
         let { description, title } = resp[0];
 
-        data.form.data = {
+        // Actualizamos formData con los datos recibidos
+        formApi.set({
           id,
           description,
           title
-        };
-        console.log(data.form.data);
+        });
       }
     }
   });
@@ -40,18 +35,19 @@
     validators: zodClient(formSchema),
   });
 
-  const { form: formData, enhance } = form;
+  const { form: formApi, enhance } = form;
+
+
 </script>
 
 <!-- Formulario HTML -->
-<form method="POST" use:enhance>
+<form method="POST" use:enhance onsubmit={() => goto(`/`)}>
   <Form.Field {form} name="title">
-    <input type="hidden" name="id" value={$formData.id || ''} />
-
+    <input type="hidden" name="id" value={$formApi.id || ''} />
     <Form.Control>
       {#snippet children({ props })} 
         <Form.Label>Título</Form.Label>
-        <Input {...props} bind:value={$formData.title} />
+        <Input {...props} bind:value={$formApi.title} />
       {/snippet}
     </Form.Control>
     <Form.Description>Este es el encabezado del TO-DO.</Form.Description>
@@ -62,7 +58,7 @@
     <Form.Control>
       {#snippet children({ props })}
         <Form.Label>Descripción</Form.Label>
-        <Input {...props} bind:value={$formData.description} />
+        <Input {...props} bind:value={$formApi.description} />
       {/snippet}
     </Form.Control>
     <Form.Description>Esta es una descripción adicional.</Form.Description>

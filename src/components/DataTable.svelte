@@ -6,10 +6,13 @@
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
-	import { Button } from '$lib/components/ui/button';
 
-	let todos = writable<Todo[]>([]);
-	let filterText = writable('');
+
+  import { Button } from "$lib/components/ui/button";
+
+
+		let todos = writable<Todo[]>([]);
+			let filterText = writable('');
 
 	onMount(async () => {
 		const fetchedData = await getData();
@@ -41,7 +44,6 @@
 		todos.set(fetchedData); // Actualizamos la tienda con los datos actualizados
 	}
 </script>
-
 <div class="rounded-md border">
 	<Table.Root {...$tableAttrs}>
 		<Table.Header>
@@ -71,15 +73,14 @@
 								</Table.Cell>
 							</Subscribe>
 						{/each}
-						<!-- celda extra para acciones -->
-						<Table.Cell>
+						 <Table.Cell>
 							<Button on:click={() => goto(`/todo-crud/${row.original.id}`)}>Editar</Button>
 							<Button
 								on:click={() => {
 									handleDelete(row.original.id);
 								}}>Eliminar</Button
 							>
-						</Table.Cell>
+						</Table.Cell> -
 					</Table.Row>
 				</Subscribe>
 			{/each}

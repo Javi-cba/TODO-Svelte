@@ -51,8 +51,8 @@
 
 <div class="m-2 h-[calc(100vh-6rem)] overflow-y-auto rounded-lg border border-indigo-300 shadow-lg">
 	{#if $isLoading}
-		<!-- Spinner -->
-		<div class="flex items-center justify-center p-4">
+		<!-- Spinner Load -->
+		<div class="flex items-center justify-center p-4 mt-4">
 			<div
 				class="h-8 w-8 animate-spin rounded-full border-4 border-t-4 border-solid border-indigo-600"
 			></div>

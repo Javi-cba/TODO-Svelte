@@ -9,65 +9,69 @@ import * as table from '$lib/server/db/schema';
 import { eq } from 'drizzle-orm';
 
 export const load: PageServerLoad = async () => {
-	return {
-		form: await superValidate(zod(formSchema))
-	};
+  return {
+    form: await superValidate(zod(formSchema)),
+  };
 };
 
 export const actions: Actions = {
-	default: async (event) => {
-		const form = await superValidate(event, zod(formSchema));
+  default: async event => {
+    const form = await superValidate(event, zod(formSchema));
 
-		if (!form.valid) {
-			return fail(400, {
-				form
-			});
-		}
+    if (!form.valid) {
+      return fail(400, {
+        form,
+      });
+    }
 
-		const { id, title, description } = form.data;
-		if (id === undefined) {
-			try {
-				await db
-					.insert(table.todo)
-					.values({
-						title: title,
-						description: description
-					})
-					.returning();
+    const { id, title, description } = form.data;
+    console.log(form.data);
 
-				return {
-					form,
-					message: 'Datos insertados correctamente!'
-				};
-			} catch (error) {
-				console.error('Error inserting data:', error);
-				return fail(500, {
-					form,
-					error: 'Error al insertar los datos.'
-				});
-			}
-		} else {
-			try {
-				const idAsNumber = parseInt(id, 10);
+    if (id === undefined) {
+      try {
+        await db
+          .insert(table.todo)
+          .values({
+            title: title,
+            description: description,
+          })
+          .returning();
 
-				await db
-					.update(table.todo)
-					.set({
-						title: title,
-						description: description
-					})
-					.where(eq(table.todo.id, idAsNumber))
-					.returning();
+        return {
+          form,
+          message: 'Datos insertados correctamente!',
+        };
+      } catch (error) {
+        console.error('Error inserting data:', error);
+        return fail(500, {
+          form,
+          error: 'Error al insertar los datos.',
+        });
+      }
+    } else {
+      try {
+        const idAsNumber = parseInt(id, 10);
 
-				return {
-					message: 'Datos actualizados correctamente!'
-				};
-			} catch (error) {
-				console.error('Error updating data:', error);
-				return fail(500, {
-					error: 'Error al actualizar los datos.'
-				});
-			}
-		}
-	}
+        await db
+          .update(table.todo)
+          .set({
+            title: title,
+            description: description,
+          })
+          .where(eq(table.todo.id, idAsNumber))
+          .returning();
+
+        return {
+          form,
+          message: 'Datos actualizados correctamente!',
+        };
+      } catch (error) {
+        console.error('Error updating data:', error);
+        return fail(500, {
+          form,
+          error: 'Error al actualizar los datos.',
+        });
+      }
+    }
+  },
 };

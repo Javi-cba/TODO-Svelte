@@ -10,7 +10,7 @@ export const GET = async () => {
 			.select()
 			.from(table.todo)
 			.where(eq(table.todo.isCompleted, false))
-			.orderBy(desc(table.todo.createdAt));
+			.orderBy(desc(table.todo.updatedAt));
 
 		if (todos.length > 0) {
 			const formattedTodos = todos.map((todo) => ({
@@ -34,8 +34,6 @@ export const GET = async () => {
 //   try {
 //     // Leer el cuerpo de la solicitud como texto
 //     const rawBody = await request.text();
-//     console.log('Raw Body:', rawBody); // Imprimir el cuerpo crudo para depuración
-
 //     // Convertir el cuerpo crudo (x-www-form-urlencoded) a un objeto JavaScript
 //     const params = new URLSearchParams(rawBody);
 //     const data = {

@@ -24,8 +24,17 @@ export const todo = pgTable('todo', {
 	isCompleted: boolean('is_completed').default(false)
 });
 
+export const usuario = pgTable('usuario', {
+	id: serial('id').primaryKey(),
+	nombre: text('nombre').notNull(),
+	createdAt: timestamp('created_at', { withTimezone: true, mode: 'date' }).defaultNow().notNull(),
+	updatedAt: timestamp('updated_at', { withTimezone: true, mode: 'date' }).defaultNow().notNull()
+});
+
 export type Todo = typeof todo.$inferSelect;
 
 export type Session = typeof session.$inferSelect;
 
 export type User = typeof user.$inferSelect;
+
+export type Usuario = typeof usuario.$inferSelect;
